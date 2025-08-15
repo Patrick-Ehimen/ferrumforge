@@ -4,7 +4,7 @@
 //! including chain creation, block addition, and chain validation.
 
 use crate::blockchain::Block;
-use crate::error::{BlockchainError, BlockchainResult};
+use crate::error::BlockchainResult;
 use serde::{Deserialize, Serialize};
 
 /// Main blockchain structure containing the chain of blocks and configuration
@@ -42,7 +42,7 @@ impl Blockchain {
     }
 
     /// Adds a new block to the chain with the given data
-    pub fn add_block(&mut self, data: String) -> BlockchainResult<()> {
+    pub fn add_block(&mut self, _data: String) -> BlockchainResult<()> {
         // Implementation will be added in later tasks
         Ok(())
     }
@@ -59,7 +59,7 @@ impl Blockchain {
     }
 
     /// Gets the average mining time for the last N blocks
-    pub fn get_mining_time(&self, blocks_to_check: usize) -> u64 {
+    pub fn get_mining_time(&self, _blocks_to_check: usize) -> u64 {
         // Implementation will be added in later tasks
         self.target_block_time
     }
