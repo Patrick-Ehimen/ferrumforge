@@ -38,18 +38,34 @@ impl Block {
 
     /// Calculates the hash for this block using SHA-256
     pub fn calculate_hash(&self) -> String {
-        // Concatenate all block fields except hash
-        let block_data = format!(
+        use std::fmt::Write;
+
+        // Pre-allocate string with estimated capacity to reduce allocations
+        let mut block_data = String::with_capacity(128);
+
+        // Use write! macro for more efficient string concatenation
+        // This concatenates all block fields into a single string for hashing
+        // Fields included: index, timestamp, data, previous_hash, nonce, difficulty
+        write!(
+            &mut block_data,
             "{}{}{}{}{}{}",
-            self.index, self.timestamp, self.data, self.previous_hash, self.nonce, self.difficulty
-        );
+            self.index,         // Block position in chain
+            self.timestamp,     // When block was created
+            self.data,          // Block payload/content
+            self.previous_hash, // Hash of previous block (chain linkage)
+            self.nonce,         // Proof-of-work value for mining
+            self.difficulty     // Mining difficulty level
+        )
+        .expect("Writing to string should never fail");
+
+        // Generate SHA-256 hash of the concatenated block data
         crate::crypto::hashing::hash_data(&block_data)
     }
 
     /// Validates this block's internal consistency
     pub fn is_valid(&self) -> bool {
-        // Implementation will be added in later tasks
-        true
+        // Check if the stored hash matches the calculated hash
+        self.hash == self.calculate_hash()
     }
 
     /// Mines this block by finding a valid nonce
