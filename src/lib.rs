@@ -8,6 +8,7 @@
 //! - Serialization and persistence
 
 pub mod blockchain;
+pub mod crypto;
 pub mod error;
 pub mod mining;
 pub mod utils;
