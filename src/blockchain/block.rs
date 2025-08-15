@@ -3,7 +3,7 @@
 //! This module defines the core Block struct and its associated operations
 //! including creation, hashing, and validation.
 
-use crate::error::{BlockchainError, BlockchainResult};
+use crate::error::BlockchainResult;
 use serde::{Deserialize, Serialize};
 
 /// Core block structure containing all necessary fields for blockchain operations
