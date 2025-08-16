@@ -1,0 +1,14 @@
+name: Rustfmt
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: rustup component add rustfmt
+      - run: cargo fmt -- --check
